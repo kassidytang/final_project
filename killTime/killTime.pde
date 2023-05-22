@@ -14,38 +14,36 @@ void setup(){
   // scenery day
   background(215, 255, 250);
   fill(172, 208, 166);
-  stroke(154, 194, 148);
+  stroke(172, 208, 166);
   rect(0, height - height/3, width, height/3);
+  
+  avatarPos = new PVector(0, 250);
+  monPos = new PVector(width, 310);
+  swordPos = new PVector(avatarPos.x + 50, avatarPos.y);
 }
 
 void draw(){
-  avatarPos = new PVector(0, 240);
-  monPos = new PVector(width, 310);
-  swordPos = new PVector(avatarPos.x + 60, avatarPos.y);
-  
   drawAvatar();
   drawMonster();
   drawSword();
   
-  /*
-  if (frameCount % 20 == 0){
+  if (frameCount % 10 == 0){
     updateAvatar();
   }
-  */
 }
 
 void drawAvatar(){
   background(215, 255, 250);
   fill(172, 208, 166);
-  stroke(154, 194, 148);
+  stroke(172, 208, 166);
   rect(0, height - height/3, width, height/3);
   
-  int bodyW = 70;
-  int bodyH = 90;
+  int bodyW = 60;
+  int bodyH = 80;
   
   // body
   fill(255, 253, 215);
-  stroke(225, 202, 176);
+  stroke(255, 253, 215);
   rect(avatarPos.x , avatarPos.y, bodyW, bodyH);
   
   /*
@@ -69,7 +67,7 @@ void drawSword(){
   int sLength = 40;
   
   if (rotation != 0){
-    translate(swordPos.x + 220,swordPos.y - 150);
+    translate(avatarPos.x + 340,avatarPos.y - 10);
     rotate(rotation);
   }
   
@@ -83,17 +81,21 @@ void drawSword(){
 }
 
 void updateAvatar(){
-  //avatarPos.add(dir);
+  avatarPos.add(dir);
+  //swordPos.add(dir);
+  monPos.sub(dir);
+  dir = new PVector(0,0);
 }
 
 void mouseClicked(){
   frameRate(30);
-  rotation = PI/3.0;
+  rotation = HALF_PI;
 }
 
 void keyPressed(){
+  frameRate(100);
   if (key == 'a')
-    dir = new PVector(-5, 0);
+    dir = new PVector(-10, 0);
   if (key == 'd')
-    dir = new PVector(5, 0);
+    dir = new PVector(10, 0);
 }
