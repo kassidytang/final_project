@@ -1,6 +1,7 @@
 // global variables
 PVector avatarPos;
 PVector monPos;
+PVector tempSword;
 PVector swordPos;
 PVector cloudPos;
 PVector dir = new PVector(0,0);
@@ -71,8 +72,10 @@ void drawSword(){
   int sThickness = 6;
   int sLength = 40;
   
+  tempSword = swordPos;
+  
   if (rotation != 0){
-    translate(avatarPos.x + 340,avatarPos.y - 10);
+    translate(swordPos.x + 290,swordPos.y - 10);
     rotate(rotation);
   }
   
@@ -104,7 +107,7 @@ void drawClouds(){
 
 void updateCharacters(){
   avatarPos.add(dir);
-  //swordPos.add(dir);
+  swordPos.add(dir);
   monPos.sub(dir);
   cloudPos.sub(dir);
   dir = new PVector(0,0);
@@ -117,8 +120,10 @@ void mouseClicked(){
 
 void keyPressed(){
   frameRate(100);
-  if (key == 'a')
+  if (key == 'a'){
     dir = new PVector(-10, 0);
-  if (key == 'd')
+  }
+  if (key == 'd'){
     dir = new PVector(10, 0);
+  }
 }
