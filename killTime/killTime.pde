@@ -2,7 +2,6 @@
 PVector avatarPos;
 PVector monPos;
 PVector swordPos;
-ArrayList<PVector> clouds = new ArrayList<PVector>();
 PVector cloudPos;
 PVector dir = new PVector(0,0);
 
@@ -89,39 +88,18 @@ void drawSword(){
 void drawClouds(){
   fill(255, 255, 255);
   stroke(255, 255, 255);
+    
   
-  //int refCloud = 0;
+  ellipse(cloudPos.x, cloudPos.y, 100, 60);
+  ellipse(cloudPos.x + 60, cloudPos.y - 20, 100, 60);
+  ellipse(cloudPos.x + 80, cloudPos.y + 10, 150, 70);
   
-  //if (clouds.size() < cloudNum){
-    /*
-    // cloud 0
-    clouds.add(cloudPos);
-    refCloud = clouds.size() - 1;
-    ellipse(clouds.get(refCloud).x, clouds.get(refCloud).y, 100, 60);
-    ellipse(clouds.get(refCloud).x + 60, clouds.get(refCloud).y - 20, 100, 60);
-    ellipse(clouds.get(refCloud).x + 80, clouds.get(refCloud).y + 10, 150, 70);
-    */
-    
-    ellipse(cloudPos.x, cloudPos.y, 100, 60);
-    ellipse(cloudPos.x + 60, cloudPos.y - 20, 100, 60);
-    ellipse(cloudPos.x + 80, cloudPos.y + 10, 150, 70);
-    
-    /*
-    // cloud 1
-    PVector cloud1 = new PVector (clouds.get(0).x + 400, clouds.get(0).y + 50);
-    clouds.add(cloud1);
-    refCloud = clouds.size() - 1;
-    ellipse(clouds.get(refCloud).x + 400, clouds.get(refCloud).y + 50, 150, 80);
-    ellipse(clouds.get(refCloud).x + 470, clouds.get(refCloud).y + 40, 130, 70);
-    */
-    
-    ellipse(cloudPos.x + 400, cloudPos.y + 50, 150, 80);
-    ellipse(cloudPos.x + 470, cloudPos.y + 40, 130, 70);
-    
-    // cloud 2
-    ellipse(cloudPos.x + 750, cloudPos.y, 120, 70);
-    ellipse(cloudPos.x + 810, cloudPos.y - 30, 100, 60);
-  //} 
+  ellipse(cloudPos.x + 400, cloudPos.y + 50, 150, 80);
+  ellipse(cloudPos.x + 470, cloudPos.y + 40, 130, 70);
+  
+  // cloud 2
+  ellipse(cloudPos.x + 750, cloudPos.y, 120, 70);
+  ellipse(cloudPos.x + 810, cloudPos.y - 30, 100, 60);
 }
 
 void updateCharacters(){
