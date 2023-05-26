@@ -26,7 +26,7 @@ void setup(){
   avatarPos = new PVector(0, 250);
   monPos = new PVector(width, 310);
   cloudPos = new PVector(100, 100);
-  swordPos = new PVector(avatarPos.x + 50, avatarPos.y);
+  swordPos = new PVector(avatarPos.x + 60, avatarPos.y);
   
   
 }
@@ -37,6 +37,7 @@ void draw(){
   drawMonster();
   drawClouds();
 
+  fill(0, 0, 0);
   textSize(15);
   text("KILLS: " + kills, 5, height - 5);
   text("PLAYER HEALTH: " + playHealth, 90, height - 5);
@@ -60,12 +61,12 @@ void drawAvatar(){
   
   // body
   fill(255, 253, 215);
-  stroke(255, 253, 215);
+  stroke(199, 167, 133);
   rect(avatarPos.x , avatarPos.y, bodyW, bodyH, 12);
   
   // ears
-  ellipse(avatarPos.x, avatarPos.y + 15, bodyW/2, bodyH/2);
-  ellipse(avatarPos.x + bodyW, avatarPos.y + 15, bodyW/2, bodyH/2);
+  ellipse(avatarPos.x, avatarPos.y + 20, bodyW/2, bodyH/2);
+  ellipse(avatarPos.x + bodyW, avatarPos.y + 20, bodyW/2, bodyH/2);
   
   // hat
   fill(92, 64, 23);
@@ -88,7 +89,7 @@ void drawSword(){
   int sLength = 40;
   
   if (rotation != 0){
-    translate(swordPos.x + 290,swordPos.y - 10);
+    translate(swordPos.x + 290, swordPos.y + 50);
     rotate(rotation);
   }
   
