@@ -61,13 +61,17 @@ void drawAvatar(){
   // body
   fill(255, 253, 215);
   stroke(255, 253, 215);
-  rect(avatarPos.x , avatarPos.y, bodyW, bodyH);
+  rect(avatarPos.x , avatarPos.y, bodyW, bodyH, 12);
   
-  /*
   // ears
-  ellipse(x, y, bodyW/2, bodyH/2);
-  ellipse(x + bodyW, y, bodyW/2, bodyH/2);
-  */
+  ellipse(avatarPos.x, avatarPos.y + 15, bodyW/2, bodyH/2);
+  ellipse(avatarPos.x + bodyW, avatarPos.y + 15, bodyW/2, bodyH/2);
+  
+  // hat
+  fill(92, 64, 23);
+  stroke(92, 64, 23);
+  ellipse(avatarPos.x + 30, avatarPos.y, 50, 20);
+  ellipse(avatarPos.x + 30, avatarPos.y - 10, 5, 10);
 }
 
 void drawMonster(){
