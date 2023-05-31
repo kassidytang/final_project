@@ -4,10 +4,19 @@ PVector aPos;
 PVector mPos;
 PVector cPos;
 PVector sPos;
+PVector backwards = new PVector(-10,0);
 
 int kills = 0;
 int pHealth = 100;
+int monHealth = 30;
 int level = 0;
+int damage = 0;
+
+// monster color change
+color damageCol = color(250, 135, 135);
+color damageLine = color(198, 93, 93);
+color normCol = color(209, 190, 226);
+color normLine = color(192, 168, 214);
 
 void setup(){
     size(1080, 480);
@@ -37,7 +46,7 @@ void draw(){
   avatar pupu = new avatar(aPos);
   pupu.draw();
   
-  monster blob = new monster(mPos);
+  monster blob = new monster(mPos, normCol, normLine);
   blob.draw();
 
   cloud puff = new cloud(cPos);
@@ -63,6 +72,35 @@ void updateCharacters(){
   mPos.sub(dir);
   cPos.sub(dir);
   dir = new PVector(0,0);
+  
+  // monster damaged
+  if (sPos.x >= mPos.x){
+    damage += 10;
+    System.out.println(damage);
+  }
+  
+  // monster killed
+  if (damage == monHealth){
+    damage = 0;
+    kills += 1;
+    mPos = new PVector(width, 310);
+    
+    
+    // player moves back to og position
+    while (aPos.x > 0){
+      frameRate(100);
+      aPos.add(backwards);
+    }
+  }
+  
+  // next level
+  if (kills == 5){
+    kills = 0;
+    level += 1;
+    
+    monHealth += 50;
+  }
+  
 }
 
 void mouseClicked(){
