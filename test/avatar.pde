@@ -2,13 +2,12 @@ class avatar{
   int bodyW = 60;
   int bodyH = 80;
   PVector avatarPos;
-  PVector swordPos;
   
   avatar(PVector pom){
     avatarPos = pom;
   }
   
-  void drawAvatar(){
+  void draw(){
     // body
     fill(255, 253, 215);
     stroke(199, 167, 133);
@@ -23,10 +22,5 @@ class avatar{
     stroke(92, 64, 23);
     ellipse(avatarPos.x + 30, avatarPos.y, 50, 20);
     ellipse(avatarPos.x + 30, avatarPos.y - 10, 5, 10);
-    
-    // with sword
-    swordPos = new PVector(avatarPos.x  + 60, avatarPos.y);
-    sword stick = new sword(swordPos);
-    stick.drawSword();
   }
 }

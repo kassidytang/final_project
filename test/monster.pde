@@ -6,7 +6,7 @@ class monster{
     monPos = mon;
   }
   
-  void drawMonster(){
+  void draw(){
     // body
     fill(209, 190, 226);
     stroke(192, 168, 214);
