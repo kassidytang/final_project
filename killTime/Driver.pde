@@ -54,12 +54,12 @@ void draw(){
   
   sword stick = new sword(sPos);
   if (rotation != 0){
-    translate(sPos.x + 290, sPos.y - 20);
+    translate(300, 300);
     rotate(rotation);
   }
   stick.draw();
 
-  rotation = 0;
+  rotation += HALF_PI;
   
   if (frameCount % 10 == 0){
     updateCharacters();
@@ -74,7 +74,7 @@ void updateCharacters(){
   dir = new PVector(0,0);
   
   // monster damaged
-  if (sPos.x >= mPos.x){
+  if (sPos.x == mPos.x || (sPos.x < mPos.x + 20 && sPos.x > mPos.x -20)){
     damage += 10;
     System.out.println(damage);
   }
@@ -105,7 +105,7 @@ void updateCharacters(){
 
 void mouseClicked(){
   frameRate(30);
-  rotation = HALF_PI;
+  rotation = radians(90);
 }
 
 void keyPressed(){
