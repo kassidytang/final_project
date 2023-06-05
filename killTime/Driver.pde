@@ -99,7 +99,6 @@ void updateCharacters() {
     curSPos = new PVector(0,0);
     normCol = color(250, 135, 135);
     normLine = color(198, 93, 93);
-    System.out.println(damage);
   }
 
   // monster killed
