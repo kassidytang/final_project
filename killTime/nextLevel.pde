@@ -2,6 +2,7 @@ class nxtLvl{
   int level;
   int w, h;
   int option;
+  int choice;
   
   nxtLvl(int lvl, int widt, int heigh){
     level = lvl;

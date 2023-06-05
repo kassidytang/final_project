@@ -27,8 +27,6 @@ StringList times = new StringList(new  String[] {"day", "sunset", "night"});
 int timesPos = 0; // 0 - day, 1 - sunset, 2 - night
 String actualTime = times.get(timesPos);
 
-int choice = -1;
-
 void setup() {
   size(1080, 480); 
 
