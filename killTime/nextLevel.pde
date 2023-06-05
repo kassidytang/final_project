@@ -11,6 +11,9 @@ class nxtLvl{
   }
   
   void draw(){
+    
+    text("NEW LEVEL", w/2, h/8);
+    
     rectMode(CENTER);
     
     // option 1
