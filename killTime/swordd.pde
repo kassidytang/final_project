@@ -12,12 +12,7 @@ class sword{
     fill(146, 114, 68);
     stroke(146, 114, 68);
     
-    if (rotation != 0){
-      translate(400, swordPos.y);
-    }
-    
     // stick
     rect(swordPos.x, swordPos.y, sThickness, sLength);
-    triangle(swordPos.x, swordPos.y, swordPos.x + 3, swordPos.y - 3, swordPos.x + 6, swordPos.y);
   }
 }

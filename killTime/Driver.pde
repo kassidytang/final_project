@@ -1,44 +1,48 @@
 float rotation;
-PVector dir = new PVector(0, 0);
+int mDim = 40; //monster dimension
 PVector aPos;
 PVector mPos;
 PVector cPos;
 PVector sPos;
+PVector curSPos;
+PVector dir = new PVector(0, 0);
+PVector monDir = new PVector(0,0);
 PVector backwards = new PVector(-10, 0);
 
 int kills = 0;
-int pHealth = 100;
+int pHealth = 50;
 int monHealth = 30;
-int level = 0;
-int damage = 0;
+int curHealth = 30;
+int level = 1;
+int damage = 10;
+int strength = 10;
+int deaths = 0;
 
 // monster color change
-color damageCol = color(250, 135, 135);
-color damageLine = color(198, 93, 93);
 color normCol = color(209, 190, 226);
 color normLine = color(192, 168, 214);
 
-void setup() {
-  size(1080, 480);
+// times of the day
+StringList times = new StringList(new  String[] {"day", "sunset", "night"});
+int timesPos = 0; // 0 - day, 1 - sunset, 2 - night
+String actualTime = times.get(timesPos);
 
-  // background
-  back();
+int choice = -1;
+
+void setup() {
+  size(1080, 480); 
 
   aPos = new PVector(0, 260);
   mPos = new PVector(width, 310);
   cPos = new PVector(100, 100);
-  sPos = new PVector(aPos.x  + 60, aPos.y);
-}
-
-void back() {
-  background(215, 255, 250);
-  fill(172, 208, 166);
-  stroke(172, 208, 166);
-  rect(0, height - height/3, width, height/3);
+  sPos = new PVector(0,0);
+  curSPos = new PVector(0,0);
 }
 
 void draw() {
-  back();
+  // background
+  bg background = new bg(actualTime);
+  background.draw();
 
   score curScore = new score(kills, pHealth, level);
   curScore.draw();
@@ -46,24 +50,27 @@ void draw() {
   avatar pupu = new avatar(aPos);
   pupu.draw();
 
-  monster blob = new monster(mPos, normCol, normLine);
+  monster blob = new monster(mPos, mDim, normCol, normLine, monHealth);
   blob.draw();
 
   cloud puff = new cloud(cPos);
   puff.draw();
 
   sword stick = new sword(sPos);
+  
   if (rotation != 0) {
-    translate(50, 300);
+    pushMatrix();
+    translate(aPos.x + 100, aPos.y + 30);
     rotate(rotation);
     stick.draw();
+    popMatrix();
   }else{
-    rotate(radians(30));
-    translate()
+    translate(aPos.x  + 60, aPos.y);
+    stick.draw();
   }
-  stick.draw();
 
   rotation = 0;
+  rectMode(CORNER);
 
   if (frameCount % 10 == 0) {
     updateCharacters();
@@ -72,44 +79,101 @@ void draw() {
 
 void updateCharacters() {
   aPos.add(dir);
-  sPos.add(dir);
   mPos.sub(dir);
   cPos.sub(dir);
+  
+  // player getting damaged
+  monDir = new PVector(10,0);
+  if (mPos.x < aPos.x + 30){
+    mPos.add(monDir);
+  }
+  else if (mPos.x > aPos.x + 30){
+    mPos.sub(monDir);
+  }
+    
+  monDir = new PVector(0,0);
   dir = new PVector(0, 0);
 
   // monster damaged
-  if (sPos.x == mPos.x || (sPos.x < mPos.x + 20 && sPos.x > mPos.x -20)) {
-    damage += 10;
+  if ((curSPos.x < mPos.x + 20) && (curSPos.x > mPos.x - 20) ) {
+    damage += strength;
+    monHealth -= strength;
+    curSPos = new PVector(0,0);
+    normCol = color(250, 135, 135);
+    normLine = color(198, 93, 93);
     System.out.println(damage);
   }
 
   // monster killed
-  if (damage == monHealth) {
+  if (damage == curHealth) {
     damage = 0;
+    normCol = color(209, 190, 226);
+    normLine = color(192, 168, 214);
     kills += 1;
+    monHealth = curHealth;
+    
     mPos = new PVector(width, 310);
-
-
-    // player moves back to og position
-    while (aPos.x > 0) {
-      frameRate(50);
-      aPos.add(backwards);
-      sPos.add(backwards);
-    }
+  }
+ 
+  if (mPos.x == aPos.x + 30){
+    pHealth -= level * 10;
+  }
+  
+  // player killed
+  if (pHealth <= 0){
+    pushMatrix();
+    frameRate(2);
+    textSize(50);
+    text("YOU DIED (o´▽`o)", 0, 50);
+    popMatrix();
+    
+    deaths += 1;
+    reset();
   }
 
   // next level
-  if (kills == 5) {
+  if (kills == 3) {
     kills = 0;
     level += 1;
 
     monHealth += 50;
+    curHealth += 50;
+    mDim += 20;  
+    
+    if (timesPos < times.size() - 1){
+      timesPos += 1;
+      actualTime = times.get(timesPos);
+    }else{
+      timesPos = 0;
+      actualTime = times.get(timesPos);
+    }
   }
+}
+
+void reset(){
+  kills = 0;
+  pHealth = 50;
+  monHealth = 30;
+  curHealth = 30;
+  level = 1;
+  damage = 0;
+  timesPos = 0;
+  strength = 10;
+  
+  normCol = color(209, 190, 226);
+  normLine = color(192, 168, 214);
+  
+  actualTime = times.get(timesPos);
+  aPos = new PVector(0, 260);
+  mPos = new PVector(width, 310);
+  cPos = new PVector(100, 100);
+  sPos = new PVector(0,0);
 }
 
 void mouseClicked() {
   frameRate(30);
-  rotation = radians(330);
+  rotation = radians(80);
+  curSPos = new PVector(aPos.x + 100, aPos.y + 30);
 }
 
 void keyPressed() {
