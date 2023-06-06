@@ -23,14 +23,35 @@ class nxtLvl{
     
     fill(124, 94, 56);
     pushMatrix();
-      translate(-150, 20);
-      textSize(100);
+      translate(-145, 30);
+      textSize(80);
       text("NEW LEVEL", w/2 - 50, h/4);
       textSize(35);
-      translate(30, - 5);
-      text("weapon upgrade", w/4, h/2);
-      text("health upgrade", w - w/4, h/2);
+      translate(30, -20);
+      text("weapon upgrade", w/4 - 8, h/2);
+      //text("health upgrade", w - w/4 + 5, h/2);
     popMatrix();
+    
+    // sword for weapon
+    //rotate(radians(60));
+    rect(w/2, h/2, 30, 5);
+    rect(w/2 - 5, h/2 + 5, 40, 5);
+    rect(w/2 - 10, h/2 + 10, 40, 5);
+    rect(w/2 - 20, h/2 + 15, 40, 5);
+    rect(w/2 - 30, )
+    
+    // heart for health
+    translate(250, -20);
+    fill(255, 123, 123);
+    stroke(255, 123, 123);
+    rect(w/2 - 5, h/2 - 10, 10, 8);
+    rect(w/2 + 35, h/2 - 10, 10, 8);
+    rect(w/2 - 5, h/2, 30, 10);
+    rect(w/2 + 35, h/2, 30, 10);
+    rect(w/2 + 15, h/2 + 15, 80, 20);
+    rect(w/2 + 15, h/2 + 30, 60, 10);
+    rect(w/2 + 15, h/2 + 40, 40, 10);
+    rect(w/2 + 15, h/2 + 50, 20, 10);
   }
   
   void mouseClicked(){
