@@ -3,6 +3,9 @@ void setup(){
 }
 
 void draw(){
-  nxtLvl level = new nxtLvl(2, width, height);
-  level.draw();
+  //nxtLvl level = new nxtLvl(2, width, height);
+  //level.draw();
+  
+  startScreen screen = new startScreen(width, height);
+  screen.draw();
 }

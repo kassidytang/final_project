@@ -57,9 +57,6 @@ class nxtLvl{
       rect(w/2 - 85, h/2 + 55, 30, 5);
       rect(w/2 - 95, h/2 + 60, 30, 5);
       rect(w/2 - 100, h/2 + 65, 20, 5);
-      fill(157, 206, 188);
-      textSize(20);
-      text("press 'g' for weapon upgrade", w/4 + 100, h/2 + 120);
     popMatrix();
     
     // heart for health
@@ -75,8 +72,6 @@ class nxtLvl{
       rect(w/2 + 15, h/2 + 30, 60, 10);
       rect(w/2 + 15, h/2 + 40, 40, 10);
       rect(w/2 + 15, h/2 + 50, 20, 10);
-      fill(220, 170, 170);
-      text("press 'h' for health upgrade", w/4 + 170, h/2 + 110);
     popMatrix();
   }
   
