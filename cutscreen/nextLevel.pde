@@ -23,18 +23,16 @@ class nxtLvl{
     
     fill(124, 94, 56);
     pushMatrix();
-      translate(-140, 20);
+      textAlign(CENTER);
       textSize(80);
-      text("NEW LEVEL", w/2 - 50, h/4);
-      textSize(35);
-      translate(30, -20);
+      text("NEW LEVEL", w/2, h/4);
     popMatrix();
     
     // sword for weapon
     pushMatrix();
       fill(136, 212, 193);
       stroke(154, 232, 213);
-      translate(-220, -30);
+      translate(-220, -40);
       rect(w/2 + 5, h/2 - 5, 20, 5);
       rect(w/2, h/2, 30, 5);
       rect(w/2 - 5, h/2 + 5, 40, 5);
@@ -57,14 +55,15 @@ class nxtLvl{
       rect(w/2 - 85, h/2 + 55, 30, 5);
       rect(w/2 - 95, h/2 + 60, 30, 5);
       rect(w/2 - 100, h/2 + 65, 20, 5);
-      fill(157, 206, 188);
-      textSize(20);
-      text("press 'g' for weapon upgrade", w/4 + 100, h/2 + 120);
     popMatrix();
+    
+      textSize(20);
+      textAlign(CENTER);
+      text("press 'g' for weapon upgrade", w/4, h/2 + 55);
     
     // heart for health
     pushMatrix();
-      translate(260, -20);
+      translate(260, -30);
       fill(255, 123, 123);
       stroke(255, 123, 123);
       rect(w/2 - 5, h/2 - 10, 10, 8);
@@ -75,17 +74,8 @@ class nxtLvl{
       rect(w/2 + 15, h/2 + 30, 60, 10);
       rect(w/2 + 15, h/2 + 40, 40, 10);
       rect(w/2 + 15, h/2 + 50, 20, 10);
-      fill(220, 170, 170);
-      text("press 'h' for health upgrade", w/4 + 170, h/2 + 110);
     popMatrix();
-  }
-  
-  void mouseClicked(){
-    if (mouseY >= height / 4 && mouseY <= 3 * height / 4){
-      if (mouseX >= width / 8 && width <= 3 * width / 8)
-        choice = 0;
-      else if (mouseX >= 5 * width / 8 && mouseX <= 7 * width / 8)
-        choice = 1;
-    }
+   
+      text("press 'h' for health upgrade", w - w/4, h/2 + 55);
   }
 }
