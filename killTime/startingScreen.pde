@@ -28,8 +28,9 @@ class startScreen{
     // text
     textAlign(CENTER);
     fill(194, 47, 47);
+    textSize(100);
+    text("K.T.", w/2, h/4);
     textSize(50);
-    text("Press 'p'", w/2, h/4);
-    text("To Start", w/2, h - h/4);
+    text("Press 'p' To Start", w/2, h - h/4);
   }
 }

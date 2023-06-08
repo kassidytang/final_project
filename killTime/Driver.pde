@@ -19,13 +19,21 @@ int strength = 10;
 int deaths = 0;
 
 // monster color change
-color normCol = color(209, 190, 226);
-color normLine = color(192, 168, 214);
+color normCol = color(211, 245, 137);
+color normLine = color(181, 214, 111);
 
 // times of the day
 StringList times = new StringList(new  String[] {"day", "sunset", "night"});
 int timesPos = 0; // 0 - day, 1 - sunset, 2 - night
 String actualTime = times.get(timesPos);
+
+int start = 0; // 0 = start screen
+int nxtLvl = 0; // 0 = not new level
+
+int sThickness = 6;
+int sLength = 40;
+
+int monSpd = 80;
 
 void setup() {
   size(1080, 480); 
@@ -38,41 +46,53 @@ void setup() {
 }
 
 void draw() {
-  // background
-  bg background = new bg(actualTime);
-  background.draw();
-
-  score curScore = new score(kills, pHealth, level);
-  curScore.draw();
-
-  avatar pupu = new avatar(aPos);
-  pupu.draw();
-
-  monster blob = new monster(mPos, mDim, normCol, normLine, monHealth);
-  blob.draw();
-
-  cloud puff = new cloud(cPos);
-  puff.draw();
-
-  sword stick = new sword(sPos);
+  if (nxtLvl == 1){
+    nxtLvl level = new nxtLvl(2, width, height);
+    level.draw();
+  }
+  else if (start == 0){
+    startScreen screen = new startScreen(width, height);
+    screen.draw();
+  }
+  else if (start == 1){
+    rectMode(CORNER);
+    // background
+    bg background = new bg(actualTime);
+    background.draw();
   
-  if (rotation != 0) {
-    pushMatrix();
-    translate(aPos.x + 100, aPos.y + 30);
-    rotate(rotation);
-    stick.draw();
-    popMatrix();
-  }else{
-    translate(aPos.x  + 60, aPos.y);
-    stick.draw();
+    score curScore = new score(kills, pHealth, level);
+    curScore.draw();
+  
+    avatar pupu = new avatar(aPos);
+    pupu.draw();
+  
+    monster blob = new monster(mPos, mDim, monHealth, normCol, normLine);
+    blob.draw();
+  
+    cloud puff = new cloud(cPos);
+    puff.draw();
+  
+    sword stick = new sword(sPos, sThickness, sLength);
+    
+    if (rotation != 0) {
+      pushMatrix();
+      translate(aPos.x + 100, aPos.y + 30);
+      rotate(rotation);
+      stick.draw();
+      popMatrix();
+    }else{
+      translate(aPos.x  + 60, aPos.y);
+      stick.draw();
+    }
+  
+    rotation = 0;
+    rectMode(CORNER);
+  
+    if (frameCount % 10 == 0) {
+      updateCharacters();
+    }
   }
-
-  rotation = 0;
-  rectMode(CORNER);
-
-  if (frameCount % 10 == 0) {
-    updateCharacters();
-  }
+  
 }
 
 void updateCharacters() {
@@ -82,6 +102,7 @@ void updateCharacters() {
   
   // player getting damaged
   monDir = new PVector(10,0);
+  frameRate(monSpd);
   if (mPos.x < aPos.x + 30){
     mPos.add(monDir);
   }
@@ -102,10 +123,10 @@ void updateCharacters() {
   }
 
   // monster killed
-  if (damage == curHealth) {
+  if (damage >= curHealth) {
     damage = 0;
-    normCol = color(209, 190, 226);
-    normLine = color(192, 168, 214);
+    normCol = color(211, 245, 137);
+    normLine = color(181, 214, 111);
     kills += 1;
     monHealth = curHealth;
     
@@ -132,10 +153,12 @@ void updateCharacters() {
   if (kills == 3) {
     kills = 0;
     level += 1;
+    nxtLvl = 1;
 
+    monSpd += 20;
     monHealth += 50;
     curHealth += 50;
-    mDim += 20;  
+    mDim += 20;
     
     if (timesPos < times.size() - 1){
       timesPos += 1;
@@ -156,9 +179,15 @@ void reset(){
   damage = 0;
   timesPos = 0;
   strength = 10;
+  start = 0;
+  nxtLvl = 0;
+  sThickness = 6;
+  sLength = 40;
+  monSpd = 80;
+  mDim = 40;
   
-  normCol = color(209, 190, 226);
-  normLine = color(192, 168, 214);
+  normCol = color(211, 245, 137);
+  normLine = color(181, 214, 111);
   
   actualTime = times.get(timesPos);
   aPos = new PVector(0, 260);
@@ -180,5 +209,16 @@ void keyPressed() {
   }
   if (key == 'd') {
     dir = new PVector(10, 0);
+  }
+  if (key == 'p') {
+    start = 1;
+  }
+  if (key == 'g') {
+    strength += 5;
+    nxtLvl = 0;
+  }
+  if (key == 'h') {
+    pHealth += 10;
+    nxtLvl = 0;
   }
 }

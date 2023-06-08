@@ -1,11 +1,13 @@
 class sword{
-  int sThickness = 6;
-  int sLength = 40;
+  int sThickness;
+  int sLength;
   float rotation;
   PVector swordPos;
   
-  sword(PVector weapon){
+  sword(PVector weapon, int t, int l){
     swordPos = weapon;
+    sThickness = t;
+    sLength = l;
   }
   
   void draw(){

@@ -11,6 +11,7 @@ class score{
   
   void draw(){
     fill(96, 78, 35);
+    textAlign(LEFT);
     textSize(15);
     text("KILLS: " + kills, 5, height - 5);
     text("PLAYER HEALTH: " + pHealth, 90, height - 5);
