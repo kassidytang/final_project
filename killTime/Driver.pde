@@ -213,11 +213,11 @@ void keyPressed() {
   if (key == 'p') {
     start = 1;
   }
-  if (key == 'g') {
+  if (key == 'g' && nxtLvl == 1) {
     strength += 5;
     nxtLvl = 0;
   }
-  if (key == 'h') {
+  if (key == 'h' && nxtLvl == 1) {
     pHealth += 10;
     nxtLvl = 0;
   }
